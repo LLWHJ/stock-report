@@ -1,0 +1,154 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: #f5f7fa;
+  color: #1d1d1f;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+.app { max-width: 820px; margin: 0 auto; padding: 24px 16px 48px; }
+
+/* ---- search bar ---- */
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+.logo { font-size: 20px; font-weight: 700; white-space: nowrap; color: #1d1d1f; }
+.input-group { display: flex; flex: 1; min-width: 260px; gap: 8px; }
+.input-group input {
+  flex: 1; padding: 10px 14px; border: 1px solid #d1d5db; border-radius: 8px;
+  font-size: 15px; outline: none; transition: border-color .2s;
+}
+.input-group input:focus { border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37,99,235,.15); }
+.input-group button {
+  padding: 10px 22px; background: #2563eb; color: #fff; border: none; border-radius: 8px;
+  font-size: 15px; font-weight: 600; cursor: pointer; transition: background .2s;
+}
+.input-group button:hover { background: #1d4ed8; }
+.input-group button:disabled { opacity: .6; cursor: not-allowed; }
+
+/* ---- loading ---- */
+.spinner {
+  width: 32px; height: 32px; border: 3px solid #e5e7eb; border-top-color: #2563eb;
+  border-radius: 50%; animation: spin .7s linear infinite; margin: 48px auto 12px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+#loading p { text-align: center; color: #6e6e73; font-size: 14px; }
+
+/* ---- overview ---- */
+.overview {
+  background: #fff; border-radius: 12px; padding: 24px; margin-bottom: 16px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.06);
+}
+.overview-top { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; flex-wrap: wrap; }
+.overview-top h1 { font-size: 22px; font-weight: 700; }
+.ticker-badge {
+  font-size: 12px; background: #eef2ff; color: #4338ca; padding: 2px 10px;
+  border-radius: 4px; font-weight: 600;
+}
+.price-row { display: flex; align-items: baseline; gap: 10px; margin-bottom: 12px; }
+.price { font-size: 32px; font-weight: 700; }
+.change { font-size: 17px; font-weight: 600; }
+.change.up { color: #16a34a; }
+.change.down { color: #dc2626; }
+.meta-row { display: flex; flex-wrap: wrap; gap: 20px; font-size: 13px; color: #6e6e73; }
+.meta-row strong { color: #1d1d1f; font-weight: 600; }
+
+/* ---- changes grid ---- */
+.changes-grid {
+  display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin-bottom: 16px;
+}
+.stat-card {
+  background: #fff; border-radius: 10px; padding: 16px; text-align: center;
+  box-shadow: 0 1px 3px rgba(0,0,0,.06);
+}
+.stat-label { display: block; font-size: 12px; color: #6e6e73; margin-bottom: 4px; }
+.stat-val { font-size: 20px; font-weight: 700; }
+.stat-val.up { color: #16a34a; }
+.stat-val.down { color: #dc2626; }
+
+/* ---- chart ---- */
+.chart-section {
+  background: #fff; border-radius: 12px; padding: 16px; margin-bottom: 16px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.06);
+}
+.chart-container { width: 100%; max-height: 360px; position: relative; }
+
+/* ---- indicators ---- */
+.indicators {
+  background: #fff; border-radius: 12px; padding: 20px 24px; margin-bottom: 16px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.06);
+}
+.indicators h2 { font-size: 15px; font-weight: 600; margin-bottom: 12px; color: #374151; }
+.ind-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; }
+.ind-item { text-align: center; }
+.ind-label { display: block; font-size: 12px; color: #6e6e73; margin-bottom: 2px; }
+.ind-val { font-size: 17px; font-weight: 600; }
+
+/* ---- news ---- */
+.news-section {
+  background: #fff; border-radius: 12px; padding: 20px 24px; margin-bottom: 16px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.06);
+}
+.news-section h2 { font-size: 15px; font-weight: 600; margin-bottom: 12px; color: #374151; }
+.news-section ul { list-style: none; }
+.news-section li {
+  display: flex; align-items: flex-start; gap: 8px; padding: 10px 0;
+  border-bottom: 1px solid #f3f4f6;
+}
+.news-section li:last-of-type { border-bottom: none; }
+.news-sentiment { font-size: 12px; padding: 2px 8px; border-radius: 4px; font-weight: 600; white-space: nowrap; margin-top: 1px; }
+.news-sentiment.positive { background: #dcfce7; color: #15803d; }
+.news-sentiment.negative { background: #fee2e2; color: #b91c1c; }
+.news-sentiment.neutral { background: #f3f4f6; color: #6b7280; }
+.news-title {
+  font-size: 14px; line-height: 1.4; color: #1d1d1f;
+  text-decoration: none; transition: color .15s;
+}
+.news-title:hover { color: #2563eb; }
+.news-meta { font-size: 12px; color: #9ca3af; margin-top: 2px; }
+
+/* ---- recommendation ---- */
+.recommendation {
+  background: #fff; border-radius: 12px; padding: 20px 24px; margin-bottom: 16px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.06);
+}
+.recommendation h2 { font-size: 15px; font-weight: 600; margin-bottom: 12px; color: #374151; }
+.rec-badge {
+  display: inline-block; font-size: 24px; font-weight: 700; padding: 6px 20px;
+  border-radius: 8px; margin-bottom: 8px;
+}
+.rec-badge.buy { background: #dcfce7; color: #15803d; }
+.rec-badge.sell { background: #fee2e2; color: #b91c1c; }
+.rec-badge.hold { background: #fef3c7; color: #92400e; }
+.rec-confidence { font-size: 14px; color: #6e6e73; margin-bottom: 12px; }
+.rec-confidence span { font-weight: 600; color: #1d1d1f; }
+.recommendation ul { list-style: none; margin-bottom: 12px; }
+.recommendation li {
+  font-size: 13px; color: #4b5563; padding: 4px 0; padding-left: 12px;
+  position: relative;
+}
+.recommendation li::before { content: "·"; position: absolute; left: 0; font-weight: 700; }
+.disclaimer { font-size: 11px; color: #9ca3af; line-height: 1.5; }
+
+/* ---- error ---- */
+.error-msg { background: #fee2e2; color: #b91c1c; padding: 16px 20px; border-radius: 10px; font-size: 14px; text-align: center; }
+
+.hidden { display: none !important; }
+
+/* ---- responsive ---- */
+@media (max-width: 600px) {
+  .app { padding: 16px 12px 32px; }
+  .search-bar { flex-direction: column; align-items: stretch; gap: 10px; }
+  .input-group { min-width: 0; }
+  .overview-top h1 { font-size: 18px; }
+  .price { font-size: 26px; }
+  .changes-grid { grid-template-columns: repeat(2,1fr); }
+  .ind-grid { grid-template-columns: repeat(2,1fr); gap: 8px; }
+  .meta-row { gap: 12px; }
+}

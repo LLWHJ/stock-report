@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stock Report · 股票分析报告</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+  <!-- 搜索区 -->
+  <header class="search-bar">
+    <div class="logo">📊 Stock Report</div>
+    <div class="input-group">
+      <input type="text" id="tickerInput" placeholder="输入股票代码，如 AAPL / 600519.SS / 0700.HK" autocomplete="off" spellcheck="false">
+      <button id="searchBtn">生成报告</button>
+    </div>
+  </header>
+
+  <!-- 结果区 -->
+  <main id="resultArea" class="hidden">
+    <div id="loading">
+      <div class="spinner"></div>
+      <p>正在获取数据，请稍候…</p>
+    </div>
+
+    <div id="report" class="hidden">
+      <!-- 头部概览 -->
+      <section class="overview">
+        <div class="overview-top">
+          <h1 id="stockName">—</h1>
+          <span class="ticker-badge" id="stockTicker">—</span>
+        </div>
+        <div class="price-row">
+          <span class="price" id="currentPrice">—</span>
+          <span class="change" id="priceChange">—</span>
+        </div>
+        <div class="meta-row">
+          <span>开盘 <strong id="openPrice">—</strong></span>
+          <span>最高 <strong id="highPrice">—</strong></span>
+          <span>最低 <strong id="lowPrice">—</strong></span>
+          <span>昨收 <strong id="prevClose">—</strong></span>
+          <span>成交量 <strong id="volume">—</strong></span>
+        </div>
+      </section>
+
+      <!-- 涨跌统计 -->
+      <section class="changes-grid">
+        <div class="stat-card" data-period="1日"><span class="stat-label">1日</span><span class="stat-val" id="chgD1">—</span></div>
+        <div class="stat-card" data-period="5日"><span class="stat-label">5日</span><span class="stat-val" id="chgD5">—</span></div>
+        <div class="stat-card" data-period="1月"><span class="stat-label">1月</span><span class="stat-val" id="chgM1">—</span></div>
+        <div class="stat-card" data-period="3月"><span class="stat-label">3月</span><span class="stat-val" id="chgM3">—</span></div>
+      </section>
+
+      <!-- 图表 -->
+      <section class="chart-section">
+        <div class="chart-container">
+          <canvas id="priceChart"></canvas>
+        </div>
+      </section>
+
+      <!-- 技术指标 -->
+      <section class="indicators">
+        <h2>技术指标</h2>
+        <div class="ind-grid">
+          <div class="ind-item"><span class="ind-label">MA5</span><span class="ind-val" id="indMA5">—</span></div>
+          <div class="ind-item"><span class="ind-label">MA10</span><span class="ind-val" id="indMA10">—</span></div>
+          <div class="ind-item"><span class="ind-label">MA20</span><span class="ind-val" id="indMA20">—</span></div>
+          <div class="ind-item"><span class="ind-label">RSI(14)</span><span class="ind-val" id="indRSI">—</span></div>
+        </div>
+      </section>
+
+      <!-- 新闻 -->
+      <section class="news-section">
+        <h2>相关新闻</h2>
+        <ul id="newsList"></ul>
+      </section>
+
+      <!-- 建议 -->
+      <section class="recommendation" id="recSection">
+        <h2>买卖参考建议</h2>
+        <div class="rec-badge" id="recBadge">—</div>
+        <div class="rec-confidence">信度: <span id="recConfidence">—</span></div>
+        <ul id="recReasons"></ul>
+        <p class="disclaimer">⚠️ 本报告仅供参考，不构成投资建议。投资有风险，决策需谨慎。</p>
+      </section>
+    </div>
+
+    <div id="error" class="hidden">
+      <p class="error-msg" id="errorMsg">—</p>
+    </div>
+  </main>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
